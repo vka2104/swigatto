@@ -26,7 +26,7 @@ public class CustomerImpl implements CustomerService {
         //setting an empty cart for new users
         Cart cart = Cart.builder().cartTotal(0)
                 .customer(customer)
-                .foodItemList(new ArrayList<>())
+                .foodItems(new ArrayList<>())
                 .build();
 
         //adding cart to the customer

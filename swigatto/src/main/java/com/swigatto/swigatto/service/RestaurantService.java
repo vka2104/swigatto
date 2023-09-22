@@ -1,8 +1,8 @@
 package com.swigatto.swigatto.service;
 
-import com.swigatto.swigatto.dto.request.FoodRequest;
+import com.swigatto.swigatto.dto.request.MenuRequest;
 import com.swigatto.swigatto.dto.request.RestaurantRequest;
-import com.swigatto.swigatto.dto.response.FoodResponse;
+import com.swigatto.swigatto.dto.response.MenuResponse;
 import com.swigatto.swigatto.dto.response.RestaurantResponse;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public interface RestaurantService {
 
     String changeOpenedStatus(int id);
 
-    RestaurantResponse addFoodToRestaurantMenu(FoodRequest foodRequest);
+    RestaurantResponse addFoodToRestaurantMenu(MenuRequest menuRequest);
 
-    List<FoodResponse> getMenuByRestaurantId(int id);
+    List<MenuResponse> getMenuByRestaurantId(int id);
 }

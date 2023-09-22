@@ -1,15 +1,16 @@
 package com.swigatto.swigatto.service.impl;
 
-import com.swigatto.swigatto.dto.request.FoodRequest;
+import com.swigatto.swigatto.dto.request.MenuRequest;
 import com.swigatto.swigatto.dto.request.RestaurantRequest;
-import com.swigatto.swigatto.dto.response.FoodResponse;
+import com.swigatto.swigatto.dto.response.MenuResponse;
 import com.swigatto.swigatto.dto.response.RestaurantResponse;
 import com.swigatto.swigatto.exception.RestaurantNotFoundException;
-import com.swigatto.swigatto.model.FoodItem;
+import com.swigatto.swigatto.model.MenuItem;
 import com.swigatto.swigatto.model.Restaurant;
 import com.swigatto.swigatto.repositary.RestaurantRepositary;
 import com.swigatto.swigatto.service.RestaurantService;
 import com.swigatto.swigatto.transformer.FoodTransformer;
+import com.swigatto.swigatto.transformer.MenuTransformer;
 import com.swigatto.swigatto.transformer.RestaurantTransformer;
 import com.swigatto.swigatto.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,24 +44,24 @@ public class RestaurantImpl implements RestaurantService {
        else return "Restaurant is Closed";
     }
 
-    public  RestaurantResponse addFoodToRestaurantMenu(FoodRequest foodRequest) {
-        Restaurant restaurant = validationUtil.ValidateRestaurantExist(foodRequest.getRestaurantId());
+    public  RestaurantResponse addFoodToRestaurantMenu(MenuRequest menuRequest) {
+        Restaurant restaurant = validationUtil.ValidateRestaurantExist(menuRequest.getRestaurantId());
         if(restaurant == null) throw new RestaurantNotFoundException("Restaurant not exist!");
 
-        FoodItem foodItem = FoodTransformer.FoodRequestToFoodItem(foodRequest);
-        //food is a child many food items can contain restaurant.so we need to add restaurant id to food that we're adding
-        foodItem.setRestaurant(restaurant);
+        MenuItem menuItem = MenuTransformer.MenuRequestToMenuItem(menuRequest);
+        //food is a child many menu items can contain restaurant.so we need to add restaurant id to each menu item
+        menuItem.setRestaurant(restaurant);
 
-        restaurant.getAvailableFoodItems().add(foodItem);
+        restaurant.getAvailableMenuItems().add(menuItem);
 
         Restaurant savedRestaurant = restaurantRepositary.save(restaurant);
         return RestaurantTransformer.RestaurantToRestaurantResponse(savedRestaurant);
 
     }
-    public List<FoodResponse> getMenuByRestaurantId(int id) {
+    public List<MenuResponse> getMenuByRestaurantId(int id) {
         Restaurant restaurant = validationUtil.ValidateRestaurantExist(id);
         if(restaurant == null) throw new RestaurantNotFoundException("Restaurant not exist!");
-        return FoodTransformer.FoodItemsToListOfFoodResponse(restaurant.getAvailableFoodItems());
+        return MenuTransformer.MenuItemsToMenuResponseList(restaurant.getAvailableMenuItems());
     }
 
 }

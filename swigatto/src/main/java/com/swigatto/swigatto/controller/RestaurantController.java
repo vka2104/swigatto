@@ -1,8 +1,8 @@
 package com.swigatto.swigatto.controller;
 
 import com.swigatto.swigatto.dto.request.RestaurantRequest;
-import com.swigatto.swigatto.dto.request.FoodRequest;
-import com.swigatto.swigatto.dto.response.FoodResponse;
+import com.swigatto.swigatto.dto.request.MenuRequest;
+import com.swigatto.swigatto.dto.response.MenuResponse;
 import com.swigatto.swigatto.dto.response.RestaurantResponse;
 import com.swigatto.swigatto.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +34,14 @@ public class RestaurantController {
        return ResponseEntity.status(HttpStatus.OK).body(res);
     }
     @PostMapping("/add/food")
-    public ResponseEntity addFoodToRestaurantMenu(@RequestBody FoodRequest foodRequest) {
-       RestaurantResponse restaurantResponse = restaurantService.addFoodToRestaurantMenu(foodRequest);
+    public ResponseEntity addFoodToRestaurantMenu(@RequestBody MenuRequest menuRequest) {
+       RestaurantResponse restaurantResponse = restaurantService.addFoodToRestaurantMenu(menuRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurantResponse);
     }
 
     @GetMapping("/menu")
     public ResponseEntity getMenuByRestaurantId(@RequestParam int id) {
-       List<FoodResponse> menu = restaurantService.getMenuByRestaurantId(id);
+       List<MenuResponse> menu = restaurantService.getMenuByRestaurantId(id);
         return ResponseEntity.status(HttpStatus.FOUND).body(menu);
     }
 

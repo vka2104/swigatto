@@ -16,6 +16,4 @@ public class CustomerResponse {
 
     String mobileNo;
 
-    CartResponse cart;
-
 }

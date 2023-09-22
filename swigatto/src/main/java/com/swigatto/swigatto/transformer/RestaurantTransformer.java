@@ -1,7 +1,7 @@
 package com.swigatto.swigatto.transformer;
 
 import com.swigatto.swigatto.dto.request.RestaurantRequest;
-import com.swigatto.swigatto.dto.response.FoodResponse;
+import com.swigatto.swigatto.dto.response.MenuResponse;
 import com.swigatto.swigatto.dto.response.RestaurantResponse;
 import com.swigatto.swigatto.model.Restaurant;
 
@@ -16,16 +16,13 @@ public class RestaurantTransformer {
                 .location(restaurantRequest.getLocation())
                 .contactNumber(restaurantRequest.getContactNumber())
                 .opened(true)
-                .availableFoodItems(new ArrayList<>())
+                .availableMenuItems(new ArrayList<>())
                 .orders(new ArrayList<>())
                 .build();
     }
 
     public static RestaurantResponse RestaurantToRestaurantResponse(Restaurant restaurant) {
-//        List<FoodResponse> menu = new ArrayList<>();
-//        if(!restaurant.getAvailableFoodItems().isEmpty()) {
-        List<FoodResponse> menu = FoodTransformer.FoodItemsToListOfFoodResponse(restaurant.getAvailableFoodItems());
-//        }
+        List<MenuResponse> menu = MenuTransformer.MenuItemsToMenuResponseList(restaurant.getAvailableMenuItems());
         return RestaurantResponse.builder()
                 .name(restaurant.getName())
                 .location(restaurant.getLocation())

@@ -1,31 +1,32 @@
 package com.swigatto.swigatto.transformer;
 
-import com.swigatto.swigatto.dto.request.FoodRequest;
-import com.swigatto.swigatto.dto.response.FoodResponse;
+import com.swigatto.swigatto.dto.request.MenuRequest;
+import com.swigatto.swigatto.dto.response.MenuResponse;
 import com.swigatto.swigatto.model.FoodItem;
+import com.swigatto.swigatto.model.MenuItem;
 
 import java.util.List;
 
 public class FoodTransformer {
 
-    public static FoodItem FoodRequestToFoodItem(FoodRequest foodRequest) {
-        return FoodItem.builder()
-                .dishName(foodRequest.getDishName())
-                .foodCategory(foodRequest.getFoodCategory())
-                .price(foodRequest.getPrice())
-                .available(foodRequest.isAvailable())
-                .veg(foodRequest.isVeg())
+    public static MenuItem FoodRequestToFoodItem(MenuRequest menuRequest) {
+        return MenuItem.builder()
+                .dishName(menuRequest.getDishName())
+                .foodCategory(menuRequest.getFoodCategory())
+                .price(menuRequest.getPrice())
+                .available(menuRequest.isAvailable())
+                .veg(menuRequest.isVeg())
                 .build();
     }
-    public static FoodResponse FoodItemToFoodResponse(FoodItem foodItem) {
-        return FoodResponse.builder()
-                .dishName(foodItem.getDishName())
-                .price(foodItem.getPrice())
-                .veg(foodItem.isVeg())
-                .foodCategory(foodItem.getFoodCategory())
+    public static MenuResponse FoodItemToFoodResponse(FoodItem foodItem) {
+        return MenuResponse.builder()
+                .dishName(foodItem.getMenuItem().getDishName())
+                .price(foodItem.getMenuItem().getPrice())
+                .veg(foodItem.getMenuItem().isVeg())
+                .foodCategory(foodItem.getMenuItem().getFoodCategory())
                 .build();
     }
-    public static List<FoodResponse> FoodItemsToListOfFoodResponse(List<FoodItem> foodItems) {
+    public static List<MenuResponse> FoodItemsToListOfFoodResponse(List<FoodItem> foodItems) {
         //map(foodItem -> FoodItemToFoodResponse(foodItems)) we're doing this below
         return foodItems.stream().map(FoodTransformer::FoodItemToFoodResponse).toList();
     }

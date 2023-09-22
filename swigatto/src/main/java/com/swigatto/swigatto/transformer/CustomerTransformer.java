@@ -16,12 +16,10 @@ public class CustomerTransformer {
     }
 
     public static CustomerResponse CustomerToCustomerResponse(Customer customer) {
-        CartResponse cartResponse = CartTransformer.CartToCartResponse(customer.getCart());
         return CustomerResponse.builder()
                 .name(customer.getName())
                 .address(customer.getAddress())
                 .mobileNo(customer.getMobileNo())
-                .cart(cartResponse)
                 .build();
     }
 }

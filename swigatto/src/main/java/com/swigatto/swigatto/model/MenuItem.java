@@ -1,5 +1,6 @@
 package com.swigatto.swigatto.model;
 
+import com.swigatto.swigatto.Enum.FoodCategory;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -13,18 +14,27 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cart")
-public class Cart {
+@Table(name = "menu_item")
+public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    int cartTotal;
+    String dishName;
 
-    @OneToOne
+    double price;
+
+    @Enumerated(EnumType.STRING)
+    FoodCategory foodCategory;
+
+    boolean veg;
+
+    boolean available;
+
+    @ManyToOne
     @JoinColumn
-    Customer customer;
+    Restaurant restaurant;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "menuItem", cascade = CascadeType.ALL)
     List<FoodItem> foodItems = new ArrayList<>();
 }

@@ -1,8 +1,6 @@
-package com.swigatto.swigatto.dto.response;
+package com.swigatto.swigatto.dto.request;
 
 import com.swigatto.swigatto.Enum.FoodCategory;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -11,7 +9,9 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodResponse {
+public class MenuRequest {
+    int restaurantId;
+
     String dishName;
 
     double price;
@@ -19,4 +19,6 @@ public class FoodResponse {
     FoodCategory foodCategory;
 
     boolean veg;
+
+    boolean available;
 }
