@@ -18,7 +18,7 @@ public class FoodItem {
 
     int requiredQuantity;
 
-    int totalCost;
+    double totalCost;
 
     @ManyToOne
     @JoinColumn

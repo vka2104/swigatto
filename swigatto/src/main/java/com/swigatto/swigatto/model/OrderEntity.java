@@ -23,7 +23,7 @@ public class OrderEntity {
 
     String orderId; //UUID
 
-    int orderTotal;
+    double orderTotal;
 
     @CreationTimestamp
     Date orderTime;
@@ -34,7 +34,7 @@ public class OrderEntity {
 
     @ManyToOne
     @JoinColumn
-    DeliverPartner deliveryPartner;
+    DeliveryPartner deliveryPartner;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     List<FoodItem> foodItems = new ArrayList<>();

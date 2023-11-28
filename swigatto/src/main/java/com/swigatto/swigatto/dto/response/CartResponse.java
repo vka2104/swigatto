@@ -4,14 +4,22 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartResponse {
+    String customerName;
 
-    int cartTotal;
+    String customerAddress;
 
-    List<MenuResponse> foodItems;
+    String customerMobile;
+
+    double cartTotal;
+
+    List<FoodResponse> foodList;
+
+    String restaurantName;
 }

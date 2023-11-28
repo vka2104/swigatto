@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "delivery_partner")
-public class DeliverPartner {
+public class DeliveryPartner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
